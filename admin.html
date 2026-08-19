@@ -9,19 +9,22 @@
 <body style="padding: 2rem;">
 
   <div style="max-width: 800px; margin: 0 auto;">
-    <h2>Dashboard Pengaturan Admin VIP</h2>
-    <hr style="border-color:var(--border); margin: 1rem 0 2rem 0;">
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+      <h2>Dashboard Admin VIP</h2>
+      <a href="index.html" class="btn-primary-sm" style="text-decoration: none;">Kembali ke Utama</a>
+    </div>
+    <hr style="border-color:var(--border); margin-bottom: 2rem;">
 
-    <!-- Form Tambah Pengumuman + Gambar -->
+    <!-- Form Tambah Pengumuman -->
     <div class="card" style="margin-bottom: 2rem;">
-      <h3>Tambah Pengumuman Baru</h3>
-      <form id="adminAnnounceForm">
+      <h3>Tambah Pengumuman + Gambar</h3>
+      <form id="adminAnnounceForm" style="margin-top: 1rem;">
         <div class="form-group">
           <label>Judul Pengumuman</label>
           <input type="text" id="annTitle" required>
         </div>
         <div class="form-group">
-          <label>Badge Category (Contoh: PROMO HUT RI / INFO)</label>
+          <label>Badge Category (Contoh: PROMO / INFO)</label>
           <input type="text" id="annBadge" required>
         </div>
         <div class="form-group">
@@ -30,19 +33,19 @@
         </div>
         <div class="form-group">
           <label>Isi Pengumuman</label>
-          <textarea id="annText" style="width:100%; background:var(--bg-dark); color:#fff; border:1px solid var(--border); padding:0.8rem; border-radius:8px; height:100px;" required></textarea>
+          <textarea id="annText" rows="4" required></textarea>
         </div>
         <button type="button" onclick="saveAnnouncement()" class="btn-primary">Simpan Pengumuman</button>
       </form>
     </div>
 
-    <!-- Form Setting Kode Promo -->
+    <!-- Form Setting Promo -->
     <div class="card">
-      <h3>Pengaturan Kode Promo (IDR, RM, & USD)</h3>
-      <form id="adminPromoForm">
+      <h3>Pengaturan Kode Promo Multi-Mata Uang</h3>
+      <form id="adminPromoForm" style="margin-top: 1rem;">
         <div class="form-group">
           <label>Kode Promo</label>
-          <input type="text" id="promoCode" placeholder="Contoh: HUTRI81" required>
+          <input type="text" id="promoCode" placeholder="Contoh: HUTRI81" required style="text-transform: uppercase;">
         </div>
         <div class="form-group">
           <label>Persentase Diskon (%)</label>
@@ -69,22 +72,35 @@
       const fileInput = document.getElementById('annImage');
 
       if (!title || !badge || !text) {
-        alert("Semua field teks harus diisi!");
+        alert("Semua field teks wajib diisi!");
         return;
       }
 
-      const newAnn = {
-        title,
-        badge,
-        text,
-        date: new Date().toLocaleDateString('id-ID'),
-        img: fileInput.files[0] ? URL.createObjectURL(fileInput.files[0]) : ""
+      const processSave = (imgData) => {
+        const newAnn = {
+          title,
+          badge,
+          text,
+          date: new Date().toLocaleDateString('id-ID'),
+          img: imgData
+        };
+
+        let currentData = JSON.parse(localStorage.getItem('vip_announcements')) || [];
+        currentData.unshift(newAnn);
+        localStorage.setItem('vip_announcements', JSON.stringify(currentData));
+        alert("Pengumuman berhasil ditambahkan!");
+        location.reload();
       };
 
-      let currentData = JSON.parse(localStorage.getItem('vip_announcements')) || [];
-      currentData.unshift(newAnn);
-      localStorage.setItem('vip_announcements', JSON.stringify(currentData));
-      alert("Pengumuman berhasil ditambahkan!");
+      if (fileInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          processSave(e.target.result);
+        };
+        reader.readAsDataURL(fileInput.files[0]);
+      } else {
+        processSave("");
+      }
     }
 
     function savePromoSettings() {
@@ -94,6 +110,11 @@
         startDate: document.getElementById('promoStartDate').value,
         endDate: document.getElementById('promoEndDate').value
       };
+
+      if (!settings.code || !settings.discount || !settings.startDate || !settings.endDate) {
+        alert("Lengkapi semua field pengaturan promo!");
+        return;
+      }
 
       localStorage.setItem('vip_promo_settings', JSON.stringify(settings));
       alert("Pengaturan Kode Promo Berhasil Disimpan!");
