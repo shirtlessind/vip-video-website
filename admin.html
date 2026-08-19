@@ -2,123 +2,140 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard - VIP Video</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Admin VIP</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    .admin-container {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    .admin-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+    }
+    .admin-menu {
+      display: flex;
+      gap: 1rem;
+      border-bottom: 2px solid var(--border);
+      margin-bottom: 2rem;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      color: var(--text-muted);
+      padding: 0.8rem 1.5rem;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      transition: all 0.3s ease;
+    }
+    .tab-btn.active {
+      color: #fff;
+      border-bottom-color: var(--primary);
+    }
+    .tab-content {
+      display: none;
+    }
+    .tab-content.active {
+      display: block;
+    }
+    .form-group label span.required {
+      color: #ef4444;
+    }
+    .form-group label span.optional {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+    .date-range {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+  </style>
 </head>
-<body style="padding: 2rem;">
+<body>
 
-  <div style="max-width: 800px; margin: 0 auto;">
-    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem;">
+  <div class="admin-container">
+    <div class="admin-header">
       <h2>Dashboard Admin VIP</h2>
-      <a href="index.html" class="btn-primary-sm" style="text-decoration: none;">Kembali ke Utama</a>
-    </div>
-    <hr style="border-color:var(--border); margin-bottom: 2rem;">
-
-    <!-- Form Tambah Pengumuman -->
-    <div class="card" style="margin-bottom: 2rem;">
-      <h3>Tambah Pengumuman + Gambar</h3>
-      <form id="adminAnnounceForm" style="margin-top: 1rem;">
-        <div class="form-group">
-          <label>Judul Pengumuman</label>
-          <input type="text" id="annTitle" required>
-        </div>
-        <div class="form-group">
-          <label>Badge Category (Contoh: PROMO / INFO)</label>
-          <input type="text" id="annBadge" required>
-        </div>
-        <div class="form-group">
-          <label>Upload Gambar Pengumuman</label>
-          <input type="file" id="annImage" accept="image/*">
-        </div>
-        <div class="form-group">
-          <label>Isi Pengumuman</label>
-          <textarea id="annText" rows="4" required></textarea>
-        </div>
-        <button type="button" onclick="saveAnnouncement()" class="btn-primary">Simpan Pengumuman</button>
-      </form>
+      <a href="index.html" class="btn-primary-sm" style="text-decoration: none;">Ke Halaman Utama</a>
     </div>
 
-    <!-- Form Setting Promo -->
-    <div class="card">
-      <h3>Pengaturan Kode Promo Multi-Mata Uang</h3>
-      <form id="adminPromoForm" style="margin-top: 1rem;">
-        <div class="form-group">
-          <label>Kode Promo</label>
-          <input type="text" id="promoCode" placeholder="Contoh: HUTRI81" required style="text-transform: uppercase;">
-        </div>
-        <div class="form-group">
-          <label>Persentase Diskon (%)</label>
-          <input type="number" id="promoDiscount" placeholder="50" min="1" max="100" required>
-        </div>
-        <div class="form-group">
-          <label>Tanggal Mulai Berlaku</label>
-          <input type="date" id="promoStartDate" required>
-        </div>
-        <div class="form-group">
-          <label>Tanggal Berakhir Promo</label>
-          <input type="date" id="promoEndDate" required>
-        </div>
-        <button type="button" onclick="savePromoSettings()" class="btn-primary">Simpan Pengaturan Promo</button>
-      </form>
+    <!-- Navigasi Menu Tab Admin -->
+    <div class="admin-menu">
+      <button class="tab-btn active" onclick="switchTab('pengumuman')"><i data-lucide="megaphone"></i> Kelola Pengumuman</button>
+      <button class="tab-btn" onclick="switchTab('diskon')"><i data-lucide="percent"></i> Kelola Diskon</button>
     </div>
+
+    <!-- TAB 1: KELOLA PENGUMUMAN -->
+    <div id="tab-pengumuman" class="tab-content active">
+      <div class="card">
+        <h3>Form Kelola Pengumuman</h3>
+        <form id="formPengumuman" style="margin-top: 1.5rem;">
+          
+          <div class="form-group">
+            <label>Upload Foto Pengumuman <span class="optional">(Opsional)</span></label>
+            <input type="file" id="annImage" accept="image/*">
+          </div>
+
+          <div class="form-group">
+            <label>Judul <span class="required">*</span></label>
+            <input type="text" id="annTitle" placeholder="Masukkan judul pengumuman" required>
+          </div>
+
+          <div class="form-group">
+            <label>Keterangan <span class="required">*</span></label>
+            <textarea id="annText" rows="5" placeholder="Masukkan isi/keterangan pengumuman..." required></textarea>
+          </div>
+
+          <button type="button" onclick="simpanPengumuman()" class="btn-primary">Publish Pengumuman</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 2: KELOLA DISKON -->
+    <div id="tab-diskon" class="tab-content">
+      <div class="card">
+        <h3>Form Kelola Diskon / Promo</h3>
+        <form id="formDiskon" style="margin-top: 1.5rem;">
+
+          <div class="form-group">
+            <label>Kode Promo <span class="required">*</span></label>
+            <input type="text" id="promoCode" placeholder="Contoh: DISKON50" style="text-transform: uppercase;" required>
+          </div>
+
+          <div class="form-group">
+            <label>Rentang Promo (Tanggal Mulai s/d Selesai) <span class="required">*</span></label>
+            <div class="date-range">
+              <div>
+                <small style="color:var(--text-muted); display:block; margin-bottom:4px;">Mulai Berlaku:</small>
+                <input type="date" id="promoStartDate" required>
+              </div>
+              <div>
+                <small style="color:var(--text-muted); display:block; margin-bottom:4px;">Berakhir On:</small>
+                <input type="date" id="promoEndDate" required>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Diskon Berapa (%) <span class="required">*</span></label>
+            <input type="number" id="promoDiscount" placeholder="Contoh: 50" min="1" max="100" required>
+          </div>
+
+          <button type="button" onclick="simpanDiskon()" class="btn-primary">Simpan Pengaturan Diskon</button>
+        </form>
+      </div>
+    </div>
+
   </div>
 
-  <script>
-    function saveAnnouncement() {
-      const title = document.getElementById('annTitle').value;
-      const badge = document.getElementById('annBadge').value;
-      const text = document.getElementById('annText').value;
-      const fileInput = document.getElementById('annImage');
-
-      if (!title || !badge || !text) {
-        alert("Semua field teks wajib diisi!");
-        return;
-      }
-
-      const processSave = (imgData) => {
-        const newAnn = {
-          title,
-          badge,
-          text,
-          date: new Date().toLocaleDateString('id-ID'),
-          img: imgData
-        };
-
-        let currentData = JSON.parse(localStorage.getItem('vip_announcements')) || [];
-        currentData.unshift(newAnn);
-        localStorage.setItem('vip_announcements', JSON.stringify(currentData));
-        alert("Pengumuman berhasil ditambahkan!");
-        location.reload();
-      };
-
-      if (fileInput.files[0]) {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-          processSave(e.target.result);
-        };
-        reader.readAsDataURL(fileInput.files[0]);
-      } else {
-        processSave("");
-      }
-    }
-
-    function savePromoSettings() {
-      const settings = {
-        code: document.getElementById('promoCode').value.toUpperCase(),
-        discount: document.getElementById('promoDiscount').value,
-        startDate: document.getElementById('promoStartDate').value,
-        endDate: document.getElementById('promoEndDate').value
-      };
-
-      if (!settings.code || !settings.discount || !settings.startDate || !settings.endDate) {
-        alert("Lengkapi semua field pengaturan promo!");
-        return;
-      }
-
-      localStorage.setItem('vip_promo_settings', JSON.stringify(settings));
-      alert("Pengaturan Kode Promo Berhasil Disimpan!");
-    }
-  </script>
+  <script src="admin.js"></script>
 </body>
 </html>
