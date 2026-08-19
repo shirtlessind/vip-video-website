@@ -13,18 +13,16 @@
     <div class="logo">VIP<span>VIDEO</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
-      <li><a href="#benefit">Keuntungan</a></li>
       <li><a href="#paket">Harga VIP</a></li>
       <li><a href="#announcements">Pengumuman</a></li>
-      <li><a href="#faq">FAQ</a></li>
       <li><button onclick="openCheckoutModal('Indonesia VIP Access', 100000, 'IDR')" class="btn-primary-sm">Join VIP</button></li>
       <li><a href="admin.html" class="btn-login-admin"><i data-lucide="lock"></i> Admin Login</a></li>
     </ul>
   </nav>
 
-  <!-- Hero Section -->
+  <!-- Hero Section (Class reveal dihapus agar konten langsung muncul) -->
   <section id="home" class="hero">
-    <div class="hero-content reveal">
+    <div class="hero-content">
       <span class="badge">🔥 3 GRUP VIP EXCLUSIVE (AKSES PERMANEN)</span>
       <h1>Akses VIP Channel Video Premium Tanpa Batas</h1>
       <p>Sekali Bayar & Permanen! Dapatkan akses langsung ke 3 Grup VIP dengan garansi 100% jika kena ban.</p>
@@ -36,8 +34,8 @@
 
   <!-- Daftar Harga Normal & Promo -->
   <section id="paket" class="section bg-alt">
-    <h2 class="section-title reveal">Daftar Harga Join VIP</h2>
-    <div class="grid-3 reveal">
+    <h2 class="section-title">Daftar Harga Join VIP</h2>
+    <div class="grid-3">
       <div class="card card-pricing card-hover">
         <img src="https://flagcdn.com/w40/id.png" alt="Indonesia" class="pricing-flag">
         <h3>INDONESIA</h3>
@@ -75,8 +73,8 @@
 
   <!-- Pengumuman Dinamis -->
   <section id="announcements" class="section">
-    <h2 class="section-title reveal">Pengumuman & Update Terbaru</h2>
-    <div id="announcementList" class="grid-1 reveal"></div>
+    <h2 class="section-title">Pengumuman & Update Terbaru</h2>
+    <div id="announcementList" class="grid-1"></div>
   </section>
 
   <!-- Modal Checkout -->
@@ -86,7 +84,7 @@
       <h3>Pendaftaran & Pembayaran VIP</h3>
       <p style="color:var(--text-muted); margin-bottom: 1rem;">Silakan scan kode QRIS resmi di bawah ini atas nama <strong>DIMAS SYAHPUTRA, HIBURAN</strong>:</p>
 
-      <!-- QRIS Display (Menggunakan qris.jpeg sesuai GitHub Anda) -->
+      <!-- QRIS Display -->
       <div class="qris-box">
         <img src="qris.jpeg" alt="QRIS DIMAS SYAHPUTRA HIBURAN" class="qris-image">
         <div class="qris-info">
@@ -125,7 +123,7 @@
           <input type="text" id="userContact" placeholder="Contoh: 081933712555 atau @glg_md" required>
         </div>
 
-        <!-- Input File Upload SS Bukti Pembayaran -->
+        <!-- Input Upload SS Bukti Pembayaran -->
         <div class="form-group">
           <label>Upload Screenshot Bukti Transfer (Gambar)</label>
           <input type="file" id="paymentProofImg" accept="image/*" required>
