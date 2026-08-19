@@ -9,18 +9,19 @@
 </head>
 <body>
 
+  <!-- Navbar -->
   <nav class="navbar">
     <div class="logo">VIP<span>VIDEO</span></div>
-    <ul class="nav-links" id="navLinks">
+    <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#paket">Harga VIP</a></li>
       <li><a href="#announcements">Pengumuman</a></li>
       <li><button onclick="openCheckoutModal('Indonesia VIP Access', 100000, 'IDR')" class="btn-primary-sm">Join VIP</button></li>
-      <li><a href="admin.html" class="btn-login-admin"><i data-lucide="lock"></i> Admin Login</a></li>
+      <li><button onclick="openLoginModal()" class="btn-login-admin"><i data-lucide="lock"></i> Admin Login</button></li>
     </ul>
   </nav>
 
-  <!-- Hero Section (Class reveal dihapus agar konten langsung muncul) -->
+  <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="hero-content">
       <span class="badge">🔥 3 GRUP VIP EXCLUSIVE (AKSES PERMANEN)</span>
@@ -36,7 +37,7 @@
   <section id="paket" class="section bg-alt">
     <h2 class="section-title">Daftar Harga Join VIP</h2>
     <div class="grid-3">
-      <div class="card card-pricing card-hover">
+      <div class="card card-pricing">
         <img src="https://flagcdn.com/w40/id.png" alt="Indonesia" class="pricing-flag">
         <h3>INDONESIA</h3>
         <div class="price">Rp 100.000 <span>/ Permanen</span></div>
@@ -44,10 +45,10 @@
           <li><i data-lucide="check"></i> Akses 3 Grup VIP</li>
           <li><i data-lucide="check"></i> Garansi 100% Kena Ban</li>
         </ul>
-        <button onclick="openCheckoutModal('Indonesia VIP Access', 100000, 'IDR')" class="btn-action-card full-width">Pilih Reguler IDR</button>
+        <button onclick="openCheckoutModal('Indonesia VIP Access', 100000, 'IDR')" class="btn-primary full-width">Pilih Reguler IDR</button>
       </div>
 
-      <div class="card card-pricing card-hover">
+      <div class="card card-pricing">
         <img src="https://flagcdn.com/w40/my.png" alt="Malaysia" class="pricing-flag">
         <h3>MALAYSIA</h3>
         <div class="price">35 RM <span>/ Permanen</span></div>
@@ -55,10 +56,10 @@
           <li><i data-lucide="check"></i> Akses 3 Grup VIP</li>
           <li><i data-lucide="check"></i> Garansi 100% Kena Ban</li>
         </ul>
-        <button onclick="openCheckoutModal('Malaysia VIP Access', 35, 'MYR')" class="btn-action-card full-width">Pilih Reguler MYR</button>
+        <button onclick="openCheckoutModal('Malaysia VIP Access', 35, 'MYR')" class="btn-primary full-width">Pilih Reguler MYR</button>
       </div>
 
-      <div class="card card-pricing card-hover">
+      <div class="card card-pricing">
         <img src="https://flagcdn.com/w40/us.png" alt="Other" class="pricing-flag">
         <h3>OTHER (INTERNATIONAL)</h3>
         <div class="price">15 USD <span>/ Permanen</span></div>
@@ -66,15 +67,15 @@
           <li><i data-lucide="check"></i> Akses 3 Grup VIP</li>
           <li><i data-lucide="check"></i> Garansi 100% Kena Ban</li>
         </ul>
-        <button onclick="openCheckoutModal('International VIP Access', 15, 'USD')" class="btn-action-card full-width">Pilih Reguler USD</button>
+        <button onclick="openCheckoutModal('International VIP Access', 15, 'USD')" class="btn-primary full-width">Pilih Reguler USD</button>
       </div>
     </div>
   </section>
 
-  <!-- Pengumuman Dinamis -->
+  <!-- Pengumuman Dinamis (2 Kolom) -->
   <section id="announcements" class="section">
     <h2 class="section-title">Pengumuman & Update Terbaru</h2>
-    <div id="announcementList" class="grid-1"></div>
+    <div id="announcementList" class="announcement-container"></div>
   </section>
 
   <!-- Modal Checkout -->
@@ -82,9 +83,8 @@
     <div class="modal-content card">
       <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
       <h3>Pendaftaran & Pembayaran VIP</h3>
-      <p style="color:var(--text-muted); margin-bottom: 1rem;">Silakan scan kode QRIS resmi di bawah ini atas nama <strong>DIMAS SYAHPUTRA, HIBURAN</strong>:</p>
+      <p style="color:var(--text-muted); margin-bottom: 1rem;">Silakan scan QRIS resmi atas nama <strong>DIMAS SYAHPUTRA, HIBURAN</strong>:</p>
 
-      <!-- QRIS Display -->
       <div class="qris-box">
         <img src="qris.jpeg" alt="QRIS DIMAS SYAHPUTRA HIBURAN" class="qris-image">
         <div class="qris-info">
@@ -99,7 +99,6 @@
           <input type="text" id="modalPaket" readonly>
         </div>
 
-        <!-- Input Kode Promo -->
         <div class="form-group">
           <label>Kode Promo (Opsional)</label>
           <div style="display: flex; gap: 8px;">
@@ -123,7 +122,6 @@
           <input type="text" id="userContact" placeholder="Contoh: 081933712555 atau @glg_md" required>
         </div>
 
-        <!-- Input Upload SS Bukti Pembayaran -->
         <div class="form-group">
           <label>Upload Screenshot Bukti Transfer (Gambar)</label>
           <input type="file" id="paymentProofImg" accept="image/*" required>
@@ -133,6 +131,25 @@
           <button type="button" onclick="sendOrder('whatsapp')" class="btn-primary btn-whatsapp"><i data-lucide="message-circle"></i> WhatsApp Admin</button>
           <button type="button" onclick="sendOrder('telegram')" class="btn-primary btn-telegram"><i data-lucide="send"></i> Telegram (@glg_md)</button>
         </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal Login Admin -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content card" style="max-width:400px;">
+      <span class="close-modal" onclick="closeLoginModal()">&times;</span>
+      <h3 style="margin-bottom:1.5rem; text-align:center;">Login Admin VIP</h3>
+      <form id="adminLoginForm">
+        <div class="form-group">
+          <label>Username</label>
+          <input type="text" id="adminUser" placeholder="Masukkan username" required>
+        </div>
+        <div class="form-group">
+          <label>Password</label>
+          <input type="password" id="adminPass" placeholder="Masukkan password" required>
+        </div>
+        <button type="button" onclick="processAdminLogin()" class="btn-primary full-width" style="margin-top:1rem;">Login</button>
       </form>
     </div>
   </div>
