@@ -1,11 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
-  if (window.lucide) {
-    lucide.createIcons();
-  }
+  if (window.lucide) { lucide.createIcons(); }
   loadCurrentPromo();
 });
 
-// Fungsi Switch Menu Tab
 function switchTab(tabName) {
   const tabs = document.querySelectorAll('.tab-content');
   const buttons = document.querySelectorAll('.tab-btn');
@@ -22,7 +19,6 @@ function switchTab(tabName) {
   }
 }
 
-// SIMPAN PENGUMUMAN
 function simpanPengumuman() {
   const title = document.getElementById('annTitle').value.trim();
   const text = document.getElementById('annText').value.trim();
@@ -37,7 +33,6 @@ function simpanPengumuman() {
     const newAnnouncement = {
       title: title,
       text: text,
-      badge: "PENGUMUMAN",
       date: new Date().toLocaleDateString('id-ID'),
       img: imgBase64 || ""
     };
@@ -52,16 +47,13 @@ function simpanPengumuman() {
 
   if (fileInput.files[0]) {
     const reader = new FileReader();
-    reader.onload = function(e) {
-      processSave(e.target.result);
-    };
+    reader.onload = function(e) { processSave(e.target.result); };
     reader.readAsDataURL(fileInput.files[0]);
   } else {
     processSave("");
   }
 }
 
-// SIMPAN DISKON
 function simpanDiskon() {
   const code = document.getElementById('promoCode').value.trim().toUpperCase();
   const startDate = document.getElementById('promoStartDate').value;
@@ -84,7 +76,6 @@ function simpanDiskon() {
   alert("Pengaturan Diskon berhasil disimpan!");
 }
 
-// LOAD EXISTING PROMO DATA
 function loadCurrentPromo() {
   const data = JSON.parse(localStorage.getItem('vip_promo_settings'));
   if (data) {
@@ -93,4 +84,9 @@ function loadCurrentPromo() {
     document.getElementById('promoEndDate').value = data.endDate || '';
     document.getElementById('promoDiscount').value = data.discount || '';
   }
+}
+
+function adminLogout() {
+  localStorage.removeItem('admin_logged_in');
+  window.location.href = "index.html";
 }
