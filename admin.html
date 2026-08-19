@@ -4,70 +4,100 @@
   <meta charset="UTF-8">
   <title>Admin Dashboard - VIP Video</title>
   <link rel="stylesheet" href="style.css">
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
-  <style>
-    .admin-container { max-width: 800px; margin: 6rem auto; padding: 2rem; }
-  </style>
+  <script src="https://unpkg.com/lucide@latest"></script>
 </head>
-<body>
+<body style="padding: 2rem;">
 
-  <!-- Screen Login Admin -->
-  <div id="loginSection" class="admin-container card">
-    <h2>Login Admin VIP</h2>
-    <p style="color:var(--text-muted); margin-bottom: 1.5rem;">Masukan username & password admin Anda.</p>
-    <form id="loginForm">
-      <div class="form-group">
-        <label>Username</label>
-        <input type="text" id="adminUsername" placeholder="dimasss" required>
-      </div>
-      <div class="form-group">
-        <label>Password</label>
-        <input type="password" id="adminPassword" placeholder="12345678" required>
-      </div>
-      <button type="submit" class="btn-primary full-width">Masuk Dashboard</button>
-    </form>
-  </div>
+  <div style="max-width: 800px; margin: 0 auto;">
+    <h2>Dashboard Pengaturan Admin VIP</h2>
+    <hr style="border-color:var(--border); margin: 1rem 0 2rem 0;">
 
-  <!-- Screen Dashboard Admin -->
-  <div id="dashboardSection" class="admin-container" style="display:none;">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
-      <h2>Dashboard Admin VIP</h2>
-      <button id="btnLogout" onclick="logoutAdmin()" class="btn-outline">Logout</button>
-    </div>
-
-    <!-- Panel Buat Pengumuman Baru -->
+    <!-- Form Tambah Pengumuman + Gambar -->
     <div class="card" style="margin-bottom: 2rem;">
-      <h3>Buat Pengumuman Baru</h3>
-      <form id="announcementForm" style="margin-top: 1rem;">
+      <h3>Tambah Pengumuman Baru</h3>
+      <form id="adminAnnounceForm">
         <div class="form-group">
           <label>Judul Pengumuman</label>
-          <input type="text" id="postTitle" required>
+          <input type="text" id="annTitle" required>
         </div>
         <div class="form-group">
-          <label>Kategori (PROMO / MAINTENANCE / UPDATE)</label>
-          <input type="text" id="postCategory" placeholder="UPDATE" required>
+          <label>Badge Category (Contoh: PROMO HUT RI / INFO)</label>
+          <input type="text" id="annBadge" required>
+        </div>
+        <div class="form-group">
+          <label>Upload Gambar Pengumuman</label>
+          <input type="file" id="annImage" accept="image/*">
         </div>
         <div class="form-group">
           <label>Isi Pengumuman</label>
-          <textarea id="postContent" style="width:100%; padding:0.8rem; background:var(--bg-dark); border:1px solid var(--border); color:#fff; border-radius:8px;" rows="4" required></textarea>
+          <textarea id="annText" style="width:100%; background:var(--bg-dark); color:#fff; border:1px solid var(--border); padding:0.8rem; border-radius:8px; height:100px;" required></textarea>
         </div>
-        <button type="submit" class="btn-primary">Publish Pengumuman</button>
+        <button type="button" onclick="saveAnnouncement()" class="btn-primary">Simpan Pengumuman</button>
       </form>
     </div>
 
-    <!-- Panel Informasi Kontak & QRIS -->
+    <!-- Form Setting Kode Promo -->
     <div class="card">
-      <h3>Informasi Admin & QRIS Merchant</h3>
-      <div style="margin-top: 1rem; color:var(--text-muted); line-height: 1.8;">
-        <p>📱 WhatsApp Admin: <strong>081933712555</strong></p>
-        <p>✈️ Telegram Username: <strong>@glg_md</strong></p>
-        <p>💳 Nama QRIS: <strong>DIMAS SYAHPUTRA, HIBURAN</strong></p>
-        <p>🆔 NMID: <strong>ID1026529746004</strong></p>
-      </div>
+      <h3>Pengaturan Kode Promo (IDR, RM, & USD)</h3>
+      <form id="adminPromoForm">
+        <div class="form-group">
+          <label>Kode Promo</label>
+          <input type="text" id="promoCode" placeholder="Contoh: HUTRI81" required>
+        </div>
+        <div class="form-group">
+          <label>Persentase Diskon (%)</label>
+          <input type="number" id="promoDiscount" placeholder="50" min="1" max="100" required>
+        </div>
+        <div class="form-group">
+          <label>Tanggal Mulai Berlaku</label>
+          <input type="date" id="promoStartDate" required>
+        </div>
+        <div class="form-group">
+          <label>Tanggal Berakhir Promo</label>
+          <input type="date" id="promoEndDate" required>
+        </div>
+        <button type="button" onclick="savePromoSettings()" class="btn-primary">Simpan Pengaturan Promo</button>
+      </form>
     </div>
   </div>
 
-  <script src="admin.js"></script>
+  <script>
+    function saveAnnouncement() {
+      const title = document.getElementById('annTitle').value;
+      const badge = document.getElementById('annBadge').value;
+      const text = document.getElementById('annText').value;
+      const fileInput = document.getElementById('annImage');
+
+      if (!title || !badge || !text) {
+        alert("Semua field teks harus diisi!");
+        return;
+      }
+
+      const newAnn = {
+        title,
+        badge,
+        text,
+        date: new Date().toLocaleDateString('id-ID'),
+        img: fileInput.files[0] ? URL.createObjectURL(fileInput.files[0]) : ""
+      };
+
+      let currentData = JSON.parse(localStorage.getItem('vip_announcements')) || [];
+      currentData.unshift(newAnn);
+      localStorage.setItem('vip_announcements', JSON.stringify(currentData));
+      alert("Pengumuman berhasil ditambahkan!");
+    }
+
+    function savePromoSettings() {
+      const settings = {
+        code: document.getElementById('promoCode').value.toUpperCase(),
+        discount: document.getElementById('promoDiscount').value,
+        startDate: document.getElementById('promoStartDate').value,
+        endDate: document.getElementById('promoEndDate').value
+      };
+
+      localStorage.setItem('vip_promo_settings', JSON.stringify(settings));
+      alert("Pengaturan Kode Promo Berhasil Disimpan!");
+    }
+  </script>
 </body>
 </html>
