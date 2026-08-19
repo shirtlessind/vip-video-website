@@ -1,11 +1,18 @@
 {
-    "announcements": [
-      {
-        "id": "1",
-        "category": "PROMO",
-        "title": "Diskon VIP Lifetime 50%",
-        "content": "Promo khusus minggu ini untuk pendaftaran akun lifetime via Telegram.",
-        "date": "19/08/2026"
-      }
-    ]
-  }
+  "announcements": [
+    {
+      "id": "1",
+      "category": "PROMO HUT RI",
+      "title": "Diskon HUT RI ke-81 TH Cuma Separuh Harga!",
+      "content": "Akses VIP Channel untuk Indonesia hanya Rp 50.000 (dari Rp 100.000), Malaysia 17.50 RM, dan Other Country 7.50 USD. Promo berlaku terbatas!",
+      "date": "19/08/2026"
+    },
+    {
+      "id": "2",
+      "category": "VIP BENEFITS",
+      "title": "Mendapatkan 3 Grup VIP sekaligus & Garansi Ban 100%",
+      "content": "Akses langsung ke VIP ALPA SQUAD, BONUS ALPA SQUAD, & CHAT GRUP. Bebas request video ke Admin @glg_md.",
+      "date": "18/08/2026"
+    }
+  ]
+}
