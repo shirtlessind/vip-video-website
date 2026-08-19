@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>Admin Dashboard - VIP Video</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+  <style>
+    .admin-container { max-width: 1000px; margin: 5rem auto; padding: 2rem; }
+    .form-group { margin-bottom: 1rem; }
+    .form-group label { display: block; margin-bottom: 0.5rem; }
+    .form-group input, .form-group textarea {
+      width: 100%; padding: 0.8rem; background: var(--bg-card); border: 1px solid var(--border); color: #fff; border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="loginSection" class="admin-container card">
+    <h2>Login Admin VIP</h2>
+    <form id="loginForm" style="margin-top: 1rem;">
+      <div class="form-group">
+        <label>Email Admin</label>
+        <input type="email" id="adminEmail" required>
+      </div>
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="adminPass" required>
+      </div>
+      <button type="submit" class="btn-primary">Login</button>
+    </form>
+  </div>
+
+  <div id="dashboardSection" class="admin-container" style="display:none;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
+      <h2>Dashboard Management Admin</h2>
+      <button id="btnLogout" class="btn-outline">Logout</button>
+    </div>
+
+    <!-- Kelola Pengumuman -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <h3>Buat Pengumuman Baru</h3>
+      <form id="announcementForm" style="margin-top: 1rem;">
+        <div class="form-group">
+          <label>Judul Pengumuman</label>
+          <input type="text" id="postTitle" required>
+        </div>
+        <div class="form-group">
+          <label>Kategori (Misal: PROMO, MAINTENANCE, UPDATE)</label>
+          <input type="text" id="postCategory" placeholder="UPDATE" required>
+        </div>
+        <div class="form-group">
+          <label>Isi Pengumuman</label>
+          <textarea id="postContent" rows="4" required></textarea>
+        </div>
+        <button type="submit" class="btn-primary">Publish Pengumuman</button>
+      </form>
+    </div>
+
+    <!-- Kelola Settings -->
+    <div class="card">
+      <h3>Kelola Harga & Link Join VIP</h3>
+      <form id="settingsForm" style="margin-top: 1rem;">
+        <div class="form-group">
+          <label>Harga VIP Bulanan</label>
+          <input type="text" id="setPriceBulanan">
+        </div>
+        <div class="form-group">
+          <label>Harga VIP Lifetime</label>
+          <input type="text" id="setPriceLifetime">
+        </div>
+        <div class="form-group">
+          <label>Link Telegram Admin</label>
+          <input type="text" id="setLinkTg">
+        </div>
+        <div class="form-group">
+          <label>Link WhatsApp Admin</label>
+          <input type="text" id="setLinkWa">
+        </div>
+        <button type="submit" class="btn-primary">Simpan Pengaturan</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="admin.js"></script>
+</body>
+</html>

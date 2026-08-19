@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VIP Video Premium - Exclusive Content</title>
+  <link rel="stylesheet" href="style.css">
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="logo">VIP<span>VIDEO</span></div>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#benefit">Keuntungan</a></li>
+      <li><a href="#paket">Paket VIP</a></li>
+      <li><a href="#announcements">Pengumuman</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#join" class="btn-primary-sm">Join VIP</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger">
+      <i data-lucide="menu"></i>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <div class="hero-content reveal">
+      <span class="badge">🔥 Komunitas Video Premium #1</span>
+      <h1>Akses Video Exclusive Tanpa Batas & Quality HD</h1>
+      <p>Nikmati ribuan konten VIP pilihan dengan update harian, tanpa iklan, dan kecepatan streaming tinggi.</p>
+      <div class="hero-action">
+        <a href="#join" id="btnHeroJoin" class="btn-primary">Bergabung Sekarang <i data-lucide="arrow-right"></i></a>
+        <a href="#announcements" class="btn-outline">Info Terbaru</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keuntungan VIP -->
+  <section id="benefit" class="section">
+    <h2 class="section-title reveal">Keuntungan Member VIP</h2>
+    <div class="grid-3 reveal">
+      <div class="card card-hover">
+        <div class="card-icon"><i data-lucide="zap"></i></div>
+        <h3>Update Setiap Hari</h3>
+        <p>Konten baru ditambahkan setiap hari langsung ke channel khusus.</p>
+      </div>
+      <div class="card card-hover">
+        <div class="card-icon"><i data-lucide="shield-check"></i></div>
+        <h3>Kualitas Full HD 1080p</h3>
+        <p>Tonton dengan jernih tanpa buffering berlebih di server dedicated.</p>
+      </div>
+      <div class="card card-hover">
+        <div class="card-icon"><i data-lucide="lock"></i></div>
+        <h3>Privasi & Aman</h3>
+        <p>Akses private group melalui link undangan unik Telegram/WhatsApp.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Paket VIP -->
+  <section id="paket" class="section bg-alt">
+    <h2 class="section-title reveal">Pilihan Paket VIP</h2>
+    <div class="grid-2 reveal">
+      <div class="card card-pricing card-hover">
+        <span class="pricing-tag">Populer</span>
+        <h3>VIP Bulanan</h3>
+        <div class="price" id="priceBulanan">Rp 50.000 <span>/ bulan</span></div>
+        <ul class="pricing-features">
+          <li><i data-lucide="check"></i> Akses Seluruh Video</li>
+          <li><i data-lucide="check"></i> Group Telegram VIP</li>
+          <li><i data-lucide="check"></i> Support Admin 24/7</li>
+        </ul>
+        <a href="#join" class="btn-primary full-width">Pilih Paket</a>
+      </div>
+      <div class="card card-pricing card-hover featured">
+        <span class="pricing-tag highlight">Hemat 50%</span>
+        <h3>VIP Lifetime</h3>
+        <div class="price" id="priceLifetime">Rp 150.000 <span>/ selamanya</span></div>
+        <ul class="pricing-features">
+          <li><i data-lucide="check"></i> Akses Selamanya Tanpa Perpanjang</li>
+          <li><i data-lucide="check"></i> Private Channel VIP</li>
+          <li><i data-lucide="check"></i> Request Content Bebas</li>
+        </ul>
+        <a href="#join" class="btn-primary full-width">Pilih Lifetime</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pengumuman Dinamis -->
+  <section id="announcements" class="section">
+    <h2 class="section-title reveal">Pengumuman & Update Terbaru</h2>
+    <div id="announcementList" class="grid-1 reveal">
+      <p class="text-center">Memuat pengumuman terbaru...</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq" class="section bg-alt">
+    <h2 class="section-title reveal">Pertanyaan Umum (FAQ)</h2>
+    <div class="faq-container reveal">
+      <div class="faq-item">
+        <div class="faq-question">Bagaimana cara mengakses video setelah bayar? <i data-lucide="chevron-down"></i></div>
+        <div class="faq-answer">Setelah pembayaran dikonfirmasi, Anda akan langsung diberikan link undangan khusus untuk masuk ke channel Telegram VIP kami.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-question">Apakah ada biaya tambahan lagi? <i data-lucide="chevron-down"></i></div>
+        <div class="faq-answer">Tidak ada. Untuk paket Lifetime Anda cukup membayar 1x saja tanpa biaya tersembunyi.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Join VIP -->
+  <section id="join" class="section hero-glow">
+    <div class="cta-box reveal">
+      <h2>Siap Untuk Bergabung Ke VIP?</h2>
+      <p>Klik tombol di bawah untuk langsung terhubung dengan Admin via Telegram / WhatsApp.</p>
+      <div class="cta-buttons">
+        <a href="#" id="btnTelegram" target="_blank" class="btn-primary btn-telegram"><i data-lucide="send"></i> Join via Telegram</a>
+        <a href="#" id="btnWhatsapp" target="_blank" class="btn-primary btn-whatsapp"><i data-lucide="message-circle"></i> Join via WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 VIP Video Premium. All rights reserved.</p>
+  </footer>
+
+  <script src="app.js"></script>
+</body>
+</html>
