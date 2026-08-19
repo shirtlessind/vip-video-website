@@ -5,41 +5,38 @@
   <title>Admin Dashboard - VIP Video</title>
   <link rel="stylesheet" href="style.css">
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
   <style>
-    .admin-container { max-width: 1000px; margin: 5rem auto; padding: 2rem; }
-    .form-group { margin-bottom: 1rem; }
-    .form-group label { display: block; margin-bottom: 0.5rem; }
-    .form-group input, .form-group textarea {
-      width: 100%; padding: 0.8rem; background: var(--bg-card); border: 1px solid var(--border); color: #fff; border-radius: 8px;
-    }
+    .admin-container { max-width: 800px; margin: 6rem auto; padding: 2rem; }
   </style>
 </head>
 <body>
 
+  <!-- Screen Login Admin -->
   <div id="loginSection" class="admin-container card">
     <h2>Login Admin VIP</h2>
-    <form id="loginForm" style="margin-top: 1rem;">
+    <p style="color:var(--text-muted); margin-bottom: 1.5rem;">Masukan username & password admin Anda.</p>
+    <form id="loginForm">
       <div class="form-group">
-        <label>Email Admin</label>
-        <input type="email" id="adminEmail" required>
+        <label>Username</label>
+        <input type="text" id="adminUsername" placeholder="dimasss" required>
       </div>
       <div class="form-group">
         <label>Password</label>
-        <input type="password" id="adminPass" required>
+        <input type="password" id="adminPassword" placeholder="12345678" required>
       </div>
-      <button type="submit" class="btn-primary">Login</button>
+      <button type="submit" class="btn-primary full-width">Masuk Dashboard</button>
     </form>
   </div>
 
+  <!-- Screen Dashboard Admin -->
   <div id="dashboardSection" class="admin-container" style="display:none;">
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 2rem;">
-      <h2>Dashboard Management Admin</h2>
-      <button id="btnLogout" class="btn-outline">Logout</button>
+      <h2>Dashboard Admin VIP</h2>
+      <button id="btnLogout" onclick="logoutAdmin()" class="btn-outline">Logout</button>
     </div>
 
-    <!-- Kelola Pengumuman -->
+    <!-- Panel Buat Pengumuman Baru -->
     <div class="card" style="margin-bottom: 2rem;">
       <h3>Buat Pengumuman Baru</h3>
       <form id="announcementForm" style="margin-top: 1rem;">
@@ -48,39 +45,26 @@
           <input type="text" id="postTitle" required>
         </div>
         <div class="form-group">
-          <label>Kategori (Misal: PROMO, MAINTENANCE, UPDATE)</label>
+          <label>Kategori (PROMO / MAINTENANCE / UPDATE)</label>
           <input type="text" id="postCategory" placeholder="UPDATE" required>
         </div>
         <div class="form-group">
           <label>Isi Pengumuman</label>
-          <textarea id="postContent" rows="4" required></textarea>
+          <textarea id="postContent" style="width:100%; padding:0.8rem; background:var(--bg-dark); border:1px solid var(--border); color:#fff; border-radius:8px;" rows="4" required></textarea>
         </div>
         <button type="submit" class="btn-primary">Publish Pengumuman</button>
       </form>
     </div>
 
-    <!-- Kelola Settings -->
+    <!-- Panel Informasi Kontak & QRIS -->
     <div class="card">
-      <h3>Kelola Harga & Link Join VIP</h3>
-      <form id="settingsForm" style="margin-top: 1rem;">
-        <div class="form-group">
-          <label>Harga VIP Bulanan</label>
-          <input type="text" id="setPriceBulanan">
-        </div>
-        <div class="form-group">
-          <label>Harga VIP Lifetime</label>
-          <input type="text" id="setPriceLifetime">
-        </div>
-        <div class="form-group">
-          <label>Link Telegram Admin</label>
-          <input type="text" id="setLinkTg">
-        </div>
-        <div class="form-group">
-          <label>Link WhatsApp Admin</label>
-          <input type="text" id="setLinkWa">
-        </div>
-        <button type="submit" class="btn-primary">Simpan Pengaturan</button>
-      </form>
+      <h3>Informasi Admin & QRIS Merchant</h3>
+      <div style="margin-top: 1rem; color:var(--text-muted); line-height: 1.8;">
+        <p>📱 WhatsApp Admin: <strong>081933712555</strong></p>
+        <p>✈️ Telegram Username: <strong>@glg_md</strong></p>
+        <p>💳 Nama QRIS: <strong>DIMAS SYAHPUTRA, HIBURAN</strong></p>
+        <p>🆔 NMID: <strong>ID1026529746004</strong></p>
+      </div>
     </div>
   </div>
 
