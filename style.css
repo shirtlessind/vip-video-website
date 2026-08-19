@@ -79,6 +79,7 @@ body {
 
 .btn-login-admin {
   border: 1px solid var(--primary);
+  color: #fff !important;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   font-size: 0.85rem;
@@ -218,6 +219,24 @@ body {
   box-shadow: 0 8px 30px rgba(139, 92, 246, 0.6);
 }
 
+.btn-action-card {
+  background: rgba(139, 92, 246, 0.15);
+  color: #fff !important;
+  border: 1px solid var(--primary);
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transition);
+  margin-top: 1.5rem;
+}
+
+.btn-action-card:hover {
+  background: var(--primary);
+  color: #fff !important;
+  box-shadow: 0 4px 15px var(--primary-glow);
+}
+
 .btn-whatsapp { background: #25D366; box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4); }
 .btn-telegram { background: #0088cc; box-shadow: 0 4px 15px rgba(0, 136, 204, 0.4); }
 
@@ -254,6 +273,27 @@ body {
   border: 1px solid var(--border);
   transition: var(--transition);
 }
+
+.card-pricing {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pricing-features {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+.pricing-features li {
+  margin-bottom: 0.6rem;
+  color: var(--text-muted);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.pricing-features li i { color: var(--accent); }
 
 .card-hover:hover {
   transform: translateY(-8px);
@@ -305,9 +345,12 @@ body {
 }
 
 .qris-image {
-  max-width: 260px;
+  max-width: 240px;
+  width: 100%;
   border-radius: 8px;
   border: 1px solid #ccc;
+  display: block;
+  margin: 0 auto;
 }
 
 .qris-info { margin-top: 0.6rem; font-size: 0.9rem; }
