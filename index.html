@@ -3,26 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VIP Video Premium - Exclusive Content</title>
+  <title>VIP Video Premium - VIP Channel Access</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Lucide Icons -->
   <script src="https://unpkg.com/lucide@latest"></script>
-  <!-- Firebase SDK -->
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-firestore-compat.js"></script>
 </head>
 <body>
 
-  <!-- Navbar -->
+  <!-- Glassmorphic Navbar -->
   <nav class="navbar">
     <div class="logo">VIP<span>VIDEO</span></div>
     <ul class="nav-links" id="navLinks">
       <li><a href="#home">Home</a></li>
       <li><a href="#benefit">Keuntungan</a></li>
-      <li><a href="#paket">Paket VIP</a></li>
+      <li><a href="#paket">Harga VIP</a></li>
+      <li><a href="#promo">Promo HUT RI</a></li>
       <li><a href="#announcements">Pengumuman</a></li>
       <li><a href="#faq">FAQ</a></li>
-      <li><a href="#join" class="btn-primary-sm">Join VIP</a></li>
+      <li><button onclick="openCheckoutModal('Indonesia Promo', 'Rp 50.000')" class="btn-primary-sm">Join VIP</button></li>
+      <li><a href="admin.html" class="btn-login-admin"><i data-lucide="lock"></i> Admin Login</a></li>
     </ul>
     <div class="hamburger" id="hamburger">
       <i data-lucide="menu"></i>
@@ -32,63 +32,126 @@
   <!-- Hero Section -->
   <section id="home" class="hero">
     <div class="hero-content reveal">
-      <span class="badge">🔥 Komunitas Video Premium #1</span>
-      <h1>Akses Video Exclusive Tanpa Batas & Quality HD</h1>
-      <p>Nikmati ribuan konten VIP pilihan dengan update harian, tanpa iklan, dan kecepatan streaming tinggi.</p>
+      <span class="badge">🔥 3 GRUP VIP EXCLUSIVE (AKSES PERMANEN)</span>
+      <h1>Akses VIP Channel Video Premium Tanpa Batas</h1>
+      <p>Sekali Bayar & Permanen! Dapatkan akses langsung ke 3 Grup VIP (VIP ALPA SQUAD, BONUS ALPA SQUAD, & CHAT GRUP) dengan garansi 100% jika kena ban.</p>
       <div class="hero-action">
-        <a href="#join" id="btnHeroJoin" class="btn-primary">Bergabung Sekarang <i data-lucide="arrow-right"></i></a>
-        <a href="#announcements" class="btn-outline">Info Terbaru</a>
+        <button onclick="openCheckoutModal('Indonesia Promo (HUT RI)', 'Rp 50.000')" class="btn-primary">Join VIP Sekarang (Rp 50.000) <i data-lucide="arrow-right"></i></button>
+        <a href="#promo" class="btn-outline">Lihat Promo HUT RI 81th</a>
       </div>
     </div>
   </section>
 
-  <!-- Keuntungan VIP -->
+  <!-- Keuntungan VIP Section -->
   <section id="benefit" class="section">
-    <h2 class="section-title reveal">Keuntungan Member VIP</h2>
+    <h2 class="section-title reveal">Keuntungan Join VIP Channel</h2>
     <div class="grid-3 reveal">
       <div class="card card-hover">
-        <div class="card-icon"><i data-lucide="zap"></i></div>
-        <h3>Update Setiap Hari</h3>
-        <p>Konten baru ditambahkan setiap hari langsung ke channel khusus.</p>
+        <div class="card-icon"><i data-lucide="key-round"></i></div>
+        <h3>Sekali Bayar & Permanen</h3>
+        <p>Bayar sekali, nikmati akses seumur hidup tanpa biaya perpanjangan atau tagihan bulanan.</p>
+      </div>
+      <div class="card card-hover">
+        <div class="card-icon"><i data-lucide="users"></i></div>
+        <h3>Mendapatkan 3 Grup VIP</h3>
+        <p>Akses eksklusif ke VIP ALPA SQUAD, BONUS ALPA SQUAD, dan CHAT GRUP untuk diskusi.</p>
       </div>
       <div class="card card-hover">
         <div class="card-icon"><i data-lucide="shield-check"></i></div>
-        <h3>Kualitas Full HD 1080p</h3>
-        <p>Tonton dengan jernih tanpa buffering berlebih di server dedicated.</p>
+        <h3>Garansi 100% Jika Kena Ban</h3>
+        <p>Jika grup/channel kena ban oleh platform, kami ganti baru secara gratis!</p>
+      </div>
+      <div class="card card-hover">
+        <div class="card-icon"><i data-lucide="zap"></i></div>
+        <h3>Selalu Update</h3>
+        <p>Konten video terbaru dan pilihan selalu diupdate secara berkala setiap hari.</p>
+      </div>
+      <div class="card card-hover">
+        <div class="card-icon"><i data-lucide="message-square-plus"></i></div>
+        <h3>Bisa Request Video</h3>
+        <p>Bebas request video pilihan sesuai dengan keinginan kamu langsung ke admin.</p>
       </div>
       <div class="card card-hover">
         <div class="card-icon"><i data-lucide="lock"></i></div>
-        <h3>Privasi & Aman</h3>
-        <p>Akses private group melalui link undangan unik Telegram/WhatsApp.</p>
+        <h3>Aman & Terpercaya</h3>
+        <p>Privasi terjaga 100%, akses langsung melalui Telegram & WhatsApp Resmi.</p>
       </div>
     </div>
   </section>
 
-  <!-- Paket VIP -->
-  <section id="paket" class="section bg-alt">
-    <h2 class="section-title reveal">Pilihan Paket VIP</h2>
-    <div class="grid-2 reveal">
-      <div class="card card-pricing card-hover">
-        <span class="pricing-tag">Populer</span>
-        <h3>VIP Bulanan</h3>
-        <div class="price" id="priceBulanan">Rp 50.000 <span>/ bulan</span></div>
-        <ul class="pricing-features">
-          <li><i data-lucide="check"></i> Akses Seluruh Video</li>
-          <li><i data-lucide="check"></i> Group Telegram VIP</li>
-          <li><i data-lucide="check"></i> Support Admin 24/7</li>
-        </ul>
-        <a href="#join" class="btn-primary full-width">Pilih Paket</a>
+  <!-- Banner Promo HUT RI ke-81 -->
+  <section id="promo" class="section bg-promo hero-glow">
+    <div class="promo-container reveal">
+      <div class="promo-badge">🇲🇨 SPESIAL HARI HUT RI ke-81 TH</div>
+      <h2>DIRGAHAYU REPUBLIK INDONESIA</h2>
+      <p class="promo-subtitle">JOIN VIP CUMA BAYAR SEPARUH HARGA! (PROMO TERBATAS AGUSTUS 2026)</p>
+      
+      <div class="promo-grid">
+        <div class="promo-card">
+          <img src="https://flagcdn.com/w80/id.png" alt="Indonesia Flag" class="flag-img">
+          <h3>INDONESIA</h3>
+          <div class="old-price">Rp 100.000</div>
+          <div class="promo-price">Rp 50.000</div>
+          <button onclick="openCheckoutModal('Indonesia (Promo HUT RI)', 'Rp 50.000')" class="btn-primary full-width">Ambil Promo IDR</button>
+        </div>
+
+        <div class="promo-card">
+          <img src="https://flagcdn.com/w80/my.png" alt="Malaysia Flag" class="flag-img">
+          <h3>MALAYSIA</h3>
+          <div class="old-price">35 RM</div>
+          <div class="promo-price">17.50 RM</div>
+          <button onclick="openCheckoutModal('Malaysia (Promo HUT RI)', '17.50 RM')" class="btn-primary full-width">Ambil Promo MYR</button>
+        </div>
+
+        <div class="promo-card">
+          <img src="https://flagcdn.com/w80/us.png" alt="International Flag" class="flag-img">
+          <h3>OTHER (GLOBAL)</h3>
+          <div class="old-price">15 USD</div>
+          <div class="promo-price">7.50 USD</div>
+          <button onclick="openCheckoutModal('Other Country (Promo HUT RI)', '7.50 USD')" class="btn-primary full-width">Ambil Promo USD</button>
+        </div>
       </div>
-      <div class="card card-pricing card-hover featured">
-        <span class="pricing-tag highlight">Hemat 50%</span>
-        <h3>VIP Lifetime</h3>
-        <div class="price" id="priceLifetime">Rp 150.000 <span>/ selamanya</span></div>
+    </div>
+  </section>
+
+  <!-- Section Harga Normal -->
+  <section id="paket" class="section bg-alt">
+    <h2 class="section-title reveal">Daftar Harga Normal Join VIP</h2>
+    <div class="grid-3 reveal">
+      <div class="card card-pricing card-hover">
+        <img src="https://flagcdn.com/w40/id.png" alt="Indonesia" class="pricing-flag">
+        <h3>INDONESIA</h3>
+        <div class="price">Rp 100.000 <span>/ Permanen</span></div>
         <ul class="pricing-features">
-          <li><i data-lucide="check"></i> Akses Selamanya Tanpa Perpanjang</li>
-          <li><i data-lucide="check"></i> Private Channel VIP</li>
-          <li><i data-lucide="check"></i> Request Content Bebas</li>
+          <li><i data-lucide="check"></i> Akses 3 Grup VIP</li>
+          <li><i data-lucide="check"></i> Garansi 100% Kena Ban</li>
+          <li><i data-lucide="check"></i> Request Video Free</li>
         </ul>
-        <a href="#join" class="btn-primary full-width">Pilih Lifetime</a>
+        <button onclick="openCheckoutModal('Indonesia (Harga Normal)', 'Rp 100.000')" class="btn-outline full-width">Pilih Reguler IDR</button>
+      </div>
+
+      <div class="card card-pricing card-hover">
+        <img src="https://flagcdn.com/w40/my.png" alt="Malaysia" class="pricing-flag">
+        <h3>MALAYSIA</h3>
+        <div class="price">35 RM <span>/ Permanen</span></div>
+        <ul class="pricing-features">
+          <li><i data-lucide="check"></i> Akses 3 Grup VIP</li>
+          <li><i data-lucide="check"></i> Garansi 100% Kena Ban</li>
+          <li><i data-lucide="check"></i> Support Admin Fast Response</li>
+        </ul>
+        <button onclick="openCheckoutModal('Malaysia (Harga Normal)', '35 RM')" class="btn-outline full-width">Pilih Reguler MYR</button>
+      </div>
+
+      <div class="card card-pricing card-hover">
+        <img src="https://flagcdn.com/w40/us.png" alt="Other" class="pricing-flag">
+        <h3>OTHER (INTERNATIONAL)</h3>
+        <div class="price">15 USD <span>/ Permanen</span></div>
+        <ul class="pricing-features">
+          <li><i data-lucide="check"></i> Akses 3 Grup VIP</li>
+          <li><i data-lucide="check"></i> Garansi 100% Kena Ban</li>
+          <li><i data-lucide="check"></i> Full HD Quality Video</li>
+        </ul>
+        <button onclick="openCheckoutModal('Other Country (Harga Normal)', '15 USD')" class="btn-outline full-width">Pilih Reguler USD</button>
       </div>
     </div>
   </section>
@@ -106,30 +169,71 @@
     <h2 class="section-title reveal">Pertanyaan Umum (FAQ)</h2>
     <div class="faq-container reveal">
       <div class="faq-item">
-        <div class="faq-question">Bagaimana cara mengakses video setelah bayar? <i data-lucide="chevron-down"></i></div>
-        <div class="faq-answer">Setelah pembayaran dikonfirmasi, Anda akan langsung diberikan link undangan khusus untuk masuk ke channel Telegram VIP kami.</div>
+        <div class="faq-question">Bagaimana cara bergabung VIP setelah transfer? <i data-lucide="chevron-down"></i></div>
+        <div class="faq-answer">Setelah Scan QRIS / Transfer, kirimkan nama & bukti bayar melalui tombol WhatsApp/Telegram. Admin @glg_md akan langsung memberikan link akses 3 Grup VIP.</div>
       </div>
       <div class="faq-item">
-        <div class="faq-question">Apakah ada biaya tambahan lagi? <i data-lucide="chevron-down"></i></div>
-        <div class="faq-answer">Tidak ada. Untuk paket Lifetime Anda cukup membayar 1x saja tanpa biaya tersembunyi.</div>
+        <div class="faq-question">Bagaimana jika grup Telegram VIP terkena Banned? <i data-lucide="chevron-down"></i></div>
+        <div class="faq-answer">Kami memberikan Garansi 100%! Jika grup/channel terkena ban, Anda akan dimasukkan ke grup pengganti yang baru secara gratis.</div>
       </div>
     </div>
   </section>
 
-  <!-- Join VIP -->
-  <section id="join" class="section hero-glow">
-    <div class="cta-box reveal">
-      <h2>Siap Untuk Bergabung Ke VIP?</h2>
-      <p>Klik tombol di bawah untuk langsung terhubung dengan Admin via Telegram / WhatsApp.</p>
-      <div class="cta-buttons">
-        <a href="#" id="btnTelegram" target="_blank" class="btn-primary btn-telegram"><i data-lucide="send"></i> Join via Telegram</a>
-        <a href="#" id="btnWhatsapp" target="_blank" class="btn-primary btn-whatsapp"><i data-lucide="message-circle"></i> Join via WhatsApp</a>
+  <!-- Modal Checkout QRIS & Input Bukti Bayar -->
+  <div id="checkoutModal" class="modal">
+    <div class="modal-content card">
+      <span class="close-modal" onclick="closeCheckoutModal()">&times;</span>
+      <h3>Pendaftaran & Pembayaran VIP</h3>
+      <p style="color:var(--text-muted); margin-bottom: 1rem;">Silakan scan kode QRIS resmi di bawah ini atas nama <strong>DIMAS SYAHPUTRA, HIBURAN</strong>:</p>
+
+      <!-- QRIS Display -->
+      <div class="qris-box">
+        <img src="qris.jpeg" alt="QRIS DIMAS SYAHPUTRA HIBURAN" class="qris-image">
+        <div class="qris-info">
+          <strong>DIMAS SYAHPUTRA, HIBURAN</strong><br>
+          <small>NMID: ID1026529746004</small>
+        </div>
+        <p class="qris-text">Dapat di-scan menggunakan semua E-Wallet (DANA, OVO, GoPay, ShopeePay, LinkAja) & All Banking (BCA, Mandiri, BRI, BNI, dll)</p>
       </div>
+
+      <!-- Form Pendaftaran & Bukti Transfer -->
+      <form id="checkoutForm">
+        <div class="form-group">
+          <label>Pilihan Paket / Promo</label>
+          <input type="text" id="modalPaket" readonly>
+        </div>
+        <div class="form-group">
+          <label>Total Nominal Transfer</label>
+          <input type="text" id="modalHarga" readonly>
+        </div>
+        <div class="form-group">
+          <label>Nama Lengkap Anda</label>
+          <input type="text" id="userName" placeholder="Masukkan nama Anda" required>
+        </div>
+        <div class="form-group">
+          <label>Nomor WhatsApp / Username Telegram Anda</label>
+          <input type="text" id="userContact" placeholder="Contoh: 081933712555 atau @glg_md" required>
+        </div>
+        <div class="form-group">
+          <label>Bukti Pembayaran / Nomor Referensi Transaksi</label>
+          <input type="text" id="paymentProof" placeholder="Contoh: Ref 1029384756 atau Link Foto Bukti" required>
+        </div>
+
+        <div style="background: rgba(234, 179, 8, 0.1); border:1px solid #eab308; padding: 0.8rem; border-radius: 8px; margin-bottom: 1.2rem;">
+          <small style="color:#eab308; font-weight:600;">Status Pendaftaran: ⏳ PENDING APPROVAL</small><br>
+          <small style="color:var(--text-muted)">Setelah klik konfirmasi, data & bukti bayar Anda akan langsung dikirim ke Kontak Admin untuk di-Approve.</small>
+        </div>
+
+        <div class="modal-action-buttons">
+          <button type="button" onclick="sendOrder('whatsapp')" class="btn-primary btn-whatsapp"><i data-lucide="message-circle"></i> Kirim ke WhatsApp Admin</button>
+          <button type="button" onclick="sendOrder('telegram')" class="btn-primary btn-telegram"><i data-lucide="send"></i> Kirim ke Telegram Admin (@glg_md)</button>
+        </div>
+      </form>
     </div>
-  </section>
+  </div>
 
   <footer>
-    <p>&copy; 2026 VIP Video Premium. All rights reserved.</p>
+    <p>&copy; 2026 VIP Video Media - Dimas Syahputra. All rights reserved. | <a href="admin.html" style="color:var(--text-muted); text-decoration:none;">Login Admin (dimasss)</a></p>
   </footer>
 
   <script src="app.js"></script>
