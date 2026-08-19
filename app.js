@@ -129,8 +129,8 @@ function applyPromoCode() {
 }
 
 function sendOrder(platform) {
-  const name = document.getElementById('userName').value;
-  const contact = document.getElementById('userContact').value;
+  const name = document.getElementById('userName').value.trim();
+  const contact = document.getElementById('userContact').value.trim();
   const paket = document.getElementById('modalPaket').value;
   const harga = document.getElementById('modalHarga').value;
   const proofImg = document.getElementById('paymentProofImg').files[0];
@@ -140,11 +140,23 @@ function sendOrder(platform) {
     return;
   }
 
-  const text = `Halo Admin, saya ingin konfirmasi pendaftaran VIP:%0A- *Nama*: ${name}%0A- *Kontak*: ${contact}%0A- *Paket*: ${paket}%0A- *Total Bayar*: ${harga}%0A- *Bukti Transfer*: (Telah dilampirkan screenshot)`;
+  // Format Teks Pesan
+  const rawText = `Halo Admin, saya ingin konfirmasi pendaftaran VIP:\n` +
+                  `• Nama: ${name}\n` +
+                  `• Kontak: ${contact}\n` +
+                  `• Paket: ${paket}\n` +
+                  `• Total Bayar: ${harga}\n` +
+                  `• Bukti Transfer: (Foto dilampirkan bersama pesan ini)`;
+
+  // Encoding teks agar karakter khusus dan spasi tidak rusak di URL
+  const encodedText = encodeURIComponent(rawText);
 
   if (platform === 'whatsapp') {
-    window.open(`https://wa.me/6281933712555?text=${text}`, '_blank');
-  } else {
-    window.open(`https://t.me/glg_md`, '_blank');
+    alert("Pesan otomatis telah dibuat. Silakan lampirkan foto bukti transfer secara manual pada ruang chat WhatsApp!");
+    window.open(`https://wa.me/6281933712555?text=${encodedText}`, '_blank');
+  } else if (platform === 'telegram') {
+    alert("Pesan otomatis telah dibuat. Silakan lampirkan foto bukti transfer secara manual pada ruang chat Telegram!");
+    // Menggunakan t.me dengan URL share agar pesan otomatis terisi di chat Telegram
+    window.open(`https://t.me/share/url?url=&text=${encodedText}`, '_blank');
   }
 }
