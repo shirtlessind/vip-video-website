@@ -2,21 +2,24 @@ let currentBasePrice = 0;
 let currentCurrency = 'IDR';
 let appliedDiscount = 0;
 
-// Load Pengumuman dan Gambar Fallback
 document.addEventListener("DOMContentLoaded", function() {
-  lucide.createIcons();
+  if (window.lucide) {
+    lucide.createIcons();
+  }
   loadAnnouncements();
 });
 
 function loadAnnouncements() {
   const container = document.getElementById('announcementList');
+  if (!container) return;
+
   const storedData = localStorage.getItem('vip_announcements');
   let announcements = storedData ? JSON.parse(storedData) : [
     {
       title: "Diskon Promo HUT RI ke-81 TH",
       date: "19/08/2026",
       badge: "PROMO HUT RI",
-      text: "Akses VIP Channel disc up to 50%! Gunakan kode promo khusus yang tersedia di promo banner.",
+      text: "Akses VIP Channel disc up to 50%! Gunakan kode promo khusus yang tersedia.",
       img: "promo-agustus.jpeg"
     },
     {
@@ -29,7 +32,7 @@ function loadAnnouncements() {
   ];
 
   container.innerHTML = announcements.map(item => `
-    <div class="card card-hover" style="margin-bottom: 1rem;">
+    <div class="card" style="margin-bottom: 1rem;">
       <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
         <span class="badge">${item.badge}</span>
         <small style="color:var(--text-muted);">${item.date}</small>
